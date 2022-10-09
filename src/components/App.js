@@ -1,20 +1,21 @@
 import React from 'react';
-import React, { useSyncExternalStore } from 'react'
 import '../styles/App.css';
 import { useState, useEffect } from 'react';
 const App = () => {
 //code here 
- const [name, setName] =useState("");
- const [id, setId] = useState(1);
+ const [name, setname] = useState([]);
+ const [id, setid] = useState(1);
 
- useEffect(() => {
-  fetch(`https://content.newtonschool.co/v1/pr/main/users/${id}`).then((resp) => resp.json()).then((data) => {
-   // console.log(data.name);
-    setName(data.name);
+ useEffect(() =>{
+  fetch(`https://content.newtonschool.co/v1/pr/main/users/${id}`)
+  .then((res) => res.json())
+  .then(data => {
+   console.log(data);
+    setname(data);
   })
  },[id])
  const changeInput = (e) => {
-  setId(e.target.value)
+  setid(e.target.value)
  }
 
 
@@ -23,7 +24,7 @@ const App = () => {
     <div className="App">
       <h1 id="text">Type a number between 1 and 10</h1>
       <input id="input" onChange={changeInput} />
-      <p id="name">{name}</p>
+      <p id="name">{name.name}</p>
     </div>
   );
 }
